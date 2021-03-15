@@ -46,35 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddExpert.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddExpert.Designer.cs">
-      <DependentUpon>AddExpert.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddProblem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddProblem.Designer.cs">
-      <DependentUpon>AddProblem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddSolution.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddSolution.Designer.cs">
-      <DependentUpon>AddSolution.cs</DependentUpon>
-    </Compile>
     <Compile Include="AnalystInterface.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AnalystInterface.Designer.cs">
       <DependentUpon>AnalystInterface.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ExpertEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ExpertEdit.Designer.cs">
-      <DependentUpon>ExpertEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="ExpertInterface.cs">
       <SubType>Form</SubType>
@@ -102,26 +78,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SolutionEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SolutionEdit.Designer.cs">
-      <DependentUpon>SolutionEdit.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="AddExpert.resx">
-      <DependentUpon>AddExpert.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddProblem.resx">
-      <DependentUpon>AddProblem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddSolution.resx">
-      <DependentUpon>AddSolution.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AnalystInterface.resx">
       <DependentUpon>AnalystInterface.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ExpertEdit.resx">
-      <DependentUpon>ExpertEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExpertInterface.resx">
       <DependentUpon>ExpertInterface.cs</DependentUpon>
@@ -144,9 +102,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SolutionEdit.resx">
-      <DependentUpon>SolutionEdit.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

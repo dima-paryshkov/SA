@@ -13,9 +13,8 @@ namespace Системный_анализ
     public partial class Menu : Form
     {
 
-        private List<List<string>> ProblemsFormulation = new List<List<string>>();
-        private List<string> Solutions = new List<string>();
-        private List<List<string>> Experts = new List<List<string>>();
+        private List<List<string>> solutions = new List<List<string>>();
+        private List<List<string>> experts = new List<List<string>>();
 
         public Menu()
         {
@@ -24,7 +23,7 @@ namespace Системный_анализ
 
         private void AnalystInterfaceButton_Click(object sender, EventArgs e)
         {
-            Form Analyst = new AnalystInterface(ref ProblemsFormulation, ref Solutions, ref Experts, this);
+            Form Analyst = new AnalystInterface(this, ref solutions, ref experts);
             this.Hide();
 
             Analyst.Show();
@@ -33,8 +32,8 @@ namespace Системный_анализ
 
         private void ExpertInterfaceButton_Click(object sender, EventArgs e)
         {
-            Form login = new login(ref Experts, this, ref ProblemsFormulation, ref Solutions);
-            login.ShowDialog();
+           // Form login = new login(ref Experts, this, ref ProblemsFormulation, ref Solutions);
+            //login.ShowDialog();
         }
     }
 }
