@@ -12,15 +12,16 @@ namespace Системный_анализ
 {
     public partial class login : Form
     {
-        private List<List<string>> Experts = new List<List<string>>();
+        private List<List<string>> solutions = new List<List<string>>();
+        private List<List<string>> experts = new List<List<string>>();
+        private List<List<string>> Problems = new List<List<string>>();
         private Menu back;
-        private List<List<string>> ProblemsFormulation = new List<List<string>>();
-        private List<string> Solutions = new List<string>();
-        public login(ref List<List<string>> Experts, Menu back, ref List<List<string>> ProblemsFormulation, ref List<string> Solutions)
+        public login(Menu back, ref List<List<string>> experts, ref List<List<string>> solutions, ref List<List<string>> Problems)
         {
-            this.ProblemsFormulation = ProblemsFormulation;
-            this.Experts = Experts;
             this.back = back;
+            this.experts = experts;
+            this.solutions = solutions;
+            this.Problems = Problems;
             InitializeComponent();
         }
 
@@ -31,21 +32,53 @@ namespace Системный_анализ
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            bool flag = false;
-            for (int i = 0; i < Experts.Count; i++)
-                if (Experts[i][1].ToString() == LoginTextBox.Text)
+            bool isAuth = false;
+            bool AnyTasks = false;
+
+            if (LoginTextBox.Text == "")
+            {
+                MessageBox.Show("Введит ваше имя");
+                return;
+            }
+
+            for (int i = 0; i < experts.Count; i++)
+            {
+                if (experts[i][0] == LoginTextBox.Text)
                 {
-                    flag = true;
+                    isAuth = true;
                     break;
                 }
-
-            if(flag)
-            {
-                Form Expert = new ExpertInterface(ref ProblemsFormulation, ref Solutions, ref Experts, back);
-                back.Hide();
-                this.Close();
-                Expert.Show();
             }
+
+            if (!isAuth)
+            {
+                MessageBox.Show("Вас нет в базе экспертов");
+                return;
+            }
+
+
+            for (int i = 0; i < experts.Count; i++)
+            {
+                if (experts[i][4].Contains(Problems[i][0]) && Problems[i][1] == "Готово")
+                {
+                    AnyTasks = true;
+                    break;
+                }
+            }
+
+            if (!AnyTasks)
+            {
+                MessageBox.Show("Нет проблем готовых к ршению, попробуйте позже");
+                return;
+            }
+
+
+            if (AnyTasks && isAuth)
+            {
+                // Form ExpertInterface = new ExpertInterface();
+                MessageBox.Show("Вы вошли");
+            }
+
         }
     }
 }

@@ -35,9 +35,12 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ProblemTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.DataExperts = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataSolutions)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataExperts)).BeginInit();
             this.SuspendLayout();
             // 
             // BackButton
@@ -83,6 +86,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.DataExperts);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -109,6 +113,16 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Форумлировка проблемы";
             // 
+            // DataExperts
+            // 
+            this.DataExperts.BackgroundColor = System.Drawing.Color.White;
+            this.DataExperts.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DataExperts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataExperts.Location = new System.Drawing.Point(9, 8);
+            this.DataExperts.Name = "DataExperts";
+            this.DataExperts.Size = new System.Drawing.Size(1081, 360);
+            this.DataExperts.TabIndex = 1;
+            // 
             // ProblemEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -124,6 +138,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataSolutions)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataExperts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +154,6 @@
         private System.Windows.Forms.TextBox ProblemTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView DataSolutions;
+        private System.Windows.Forms.DataGridView DataExperts;
     }
 }

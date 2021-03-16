@@ -17,15 +17,21 @@ namespace Системный_анализ
         private DataGridView Data = new DataGridView();
         private DataGridViewCellEventArgs e;
         private List<List<string>> solutions = new List<List<string>>();
-        public ProblemEdit(AnalystInterface back, ref DataGridView Data, DataGridViewCellEventArgs e, ref List<List<string>> solutions)
+        private List<List<string>> experts = new List<List<string>>();
+        private List<string> Formulations = new List<string>();
+
+        public ProblemEdit(AnalystInterface back, ref DataGridView Data, DataGridViewCellEventArgs e, ref List<List<string>> solutions, ref List<List<string>> experts, ref List<string> Formulations)
         {
             this.Data = Data;
             this.e = e;
             this.back = back;
+            this.experts = experts;
+            this.Formulations = Formulations;
             this.solutions = solutions;
             InitializeComponent();
             DataSolutions.CellValueChanged += Data_CellValueChanged;
             DataSolutions.CellMouseClick += DataSolutions_CellMouseClick;
+            DataExperts.CellMouseClick += DataExperts_CellMouseClick;
 
         }
 
@@ -36,13 +42,43 @@ namespace Системный_анализ
             else
                 ProblemTextBox.Text = "";
 
-            DataSolutions.Columns.Add("num", "№");
-            DataSolutions.Columns.Add("name", "Альтернатива");
-            DataSolutions.Columns.Add("del", "");
-            DataSolutions.Columns[0].ReadOnly = true;
-            DataSolutions.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            DataSolutions.Columns[1].Width = 500;
-            DataSolutions.Columns[2].Width = 22;
+            //список альтернатив выбранной проблемы
+            {
+                DataSolutions.Columns.Add("num", "№");
+                DataSolutions.Columns.Add("name", "Альтернатива");
+                DataSolutions.Columns.Add("del", "");
+                DataSolutions.Columns[0].ReadOnly = true;
+                DataSolutions.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                DataSolutions.Columns[1].Width = 500;
+                DataSolutions.Columns[2].Width = 22;
+            }
+          
+
+            //список экспертов
+            { 
+                DataExperts.Columns.Add("name", "Имя");
+                DataExperts.Columns.Add("area", "Область деятельности");
+                DataExperts.Columns.Add("experience", "Опыт работы");
+                DataExperts.Columns.Add("grade", "Оценка компетенции");
+                DataExperts.Columns.Add("problems", "Участвует");
+                DataExperts.Columns.Add("add", "");
+                DataExperts.Columns.Add("del", "");
+          
+                DataExperts.Columns[5].Width = 22;
+                DataExperts.Columns[6].Width = 22;
+                DataExperts.Columns[5].ReadOnly = true;
+                DataExperts.Columns[4].ReadOnly = true;
+                DataExperts.Columns[3].ReadOnly = true;
+                DataExperts.Columns[2].ReadOnly = true;
+                DataExperts.Columns[1].ReadOnly = true;
+                DataExperts.Columns[0].ReadOnly = true;
+                DataExperts.Columns[6].ReadOnly = true;
+                DataExperts.Columns[0].Width = 150;
+                DataExperts.Columns[1].Width = 250;
+                DataExperts.Columns[2].Width = 100;
+                DataExperts.Columns[3].Width = 100;
+            }
+
 
             for (int i = 0; i < solutions[this.e.RowIndex].Count; i++)
             {
@@ -57,11 +93,32 @@ namespace Системный_анализ
                 DataSolutions.Columns[1].Width = 500;
             }
 
+            for (int i = 0; i < experts.Count; i++)
+            {
+                DataExperts.Rows.Add();
+                DataExperts.Rows[i].Cells[0].Value = experts[i][0];
+                DataExperts.Rows[i].Cells[1].Value = experts[i][1];
+                DataExperts.Rows[i].Cells[2].Value = experts[i][2];
+                DataExperts.Rows[i].Cells[3].Value = experts[i][3];
+
+                DataExperts.Rows[i].Cells[5].Value = " V";
+                DataExperts.Rows[i].Cells[6].Value = " X";
+                DataExperts.Rows[i].Cells[5].Style.BackColor = Color.Green;
+                DataExperts.Rows[i].Cells[6].Style.BackColor = Color.Red;
+
+                if (experts[i][4].Contains(Data.Rows[this.e.RowIndex].Cells[1].Value.ToString()))
+                    DataExperts.Rows[i].Cells[4].Value = "Да";
+                else
+                    DataExperts.Rows[i].Cells[4].Value = "Нет";
+
+            }
+
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
             Data.Rows[this.e.RowIndex].Cells[4].Value = ProblemTextBox.Text;
+            Formulations[this.e.RowIndex] = ProblemTextBox.Text;
             solutions[this.e.RowIndex].Clear();
 
             for (int i = 0; i < DataSolutions.Rows.Count - 1; i++)
@@ -87,6 +144,39 @@ namespace Системный_анализ
                         DataSolutions.Rows[i].Cells[0].Value = (i + 1);
 
                 }
+
+        }
+
+        private void DataExperts_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            if (e.ColumnIndex == 5 && e.RowIndex != -1)
+            {
+
+                if (DataExperts.Rows[e.RowIndex].Cells[5].Value != null)
+                {
+                    if (experts[e.RowIndex][4].Contains(Data.Rows[this.e.RowIndex].Cells[1].Value.ToString()))
+                        return;
+
+
+                    experts[e.RowIndex][4] += Data.Rows[this.e.RowIndex].Cells[1].Value.ToString() + "  ";
+                    DataExperts.Rows[e.RowIndex].Cells[4].Value = "Да";
+
+                }
+            }
+
+            if (e.ColumnIndex == 6 && e.RowIndex != -1)
+            {
+
+                if (!experts[e.RowIndex][4].Contains(Data.Rows[this.e.RowIndex].Cells[1].Value.ToString()))
+                    return;
+
+                var substr = Data.Rows[this.e.RowIndex].Cells[1].Value.ToString() + "  ";
+                experts[e.RowIndex][4] = experts[e.RowIndex][4].Replace(substr, "");
+                DataExperts.Rows[e.RowIndex].Cells[4].Value = "Нет";
+
+
+            }
 
         }
 
