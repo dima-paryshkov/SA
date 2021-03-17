@@ -52,6 +52,12 @@
     <Compile Include="AnalystInterface.Designer.cs">
       <DependentUpon>AnalystInterface.cs</DependentUpon>
     </Compile>
+    <Compile Include="editformulation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editformulation.Designer.cs">
+      <DependentUpon>editformulation.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpertInterface.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AnalystInterface.resx">
       <DependentUpon>AnalystInterface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editformulation.resx">
+      <DependentUpon>editformulation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExpertInterface.resx">
       <DependentUpon>ExpertInterface.cs</DependentUpon>

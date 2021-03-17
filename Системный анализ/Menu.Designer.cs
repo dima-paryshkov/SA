@@ -36,10 +36,10 @@
             // 
             // AnalystInterfaceButton
             // 
-            this.AnalystInterfaceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AnalystInterfaceButton.Location = new System.Drawing.Point(237, 217);
+            this.AnalystInterfaceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AnalystInterfaceButton.Location = new System.Drawing.Point(327, 193);
             this.AnalystInterfaceButton.Name = "AnalystInterfaceButton";
-            this.AnalystInterfaceButton.Size = new System.Drawing.Size(182, 55);
+            this.AnalystInterfaceButton.Size = new System.Drawing.Size(238, 49);
             this.AnalystInterfaceButton.TabIndex = 0;
             this.AnalystInterfaceButton.Text = "Интерфейс аналитика";
             this.AnalystInterfaceButton.UseVisualStyleBackColor = true;
@@ -49,7 +49,7 @@
             // 
             this.InterfaceChoiceLabel.AutoSize = true;
             this.InterfaceChoiceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.InterfaceChoiceLabel.Location = new System.Drawing.Point(322, 139);
+            this.InterfaceChoiceLabel.Location = new System.Drawing.Point(342, 155);
             this.InterfaceChoiceLabel.Name = "InterfaceChoiceLabel";
             this.InterfaceChoiceLabel.Size = new System.Drawing.Size(205, 24);
             this.InterfaceChoiceLabel.TabIndex = 2;
@@ -57,10 +57,10 @@
             // 
             // ExpertInterfaceButton
             // 
-            this.ExpertInterfaceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ExpertInterfaceButton.Location = new System.Drawing.Point(454, 217);
+            this.ExpertInterfaceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ExpertInterfaceButton.Location = new System.Drawing.Point(327, 248);
             this.ExpertInterfaceButton.Name = "ExpertInterfaceButton";
-            this.ExpertInterfaceButton.Size = new System.Drawing.Size(182, 55);
+            this.ExpertInterfaceButton.Size = new System.Drawing.Size(238, 49);
             this.ExpertInterfaceButton.TabIndex = 3;
             this.ExpertInterfaceButton.Text = "Интерфейс эксперта";
             this.ExpertInterfaceButton.UseVisualStyleBackColor = true;
@@ -74,11 +74,13 @@
             this.ExitButton.TabIndex = 4;
             this.ExitButton.Text = "Выйти";
             this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(863, 512);
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.ExpertInterfaceButton);

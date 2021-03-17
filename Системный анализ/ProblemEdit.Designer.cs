@@ -33,9 +33,9 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.DataSolutions = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.DataExperts = new System.Windows.Forms.DataGridView();
             this.ProblemTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.DataExperts = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataSolutions)).BeginInit();
@@ -95,6 +95,16 @@
             this.tabPage2.Text = "Эксперты";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // DataExperts
+            // 
+            this.DataExperts.BackgroundColor = System.Drawing.Color.White;
+            this.DataExperts.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DataExperts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataExperts.Location = new System.Drawing.Point(9, 8);
+            this.DataExperts.Name = "DataExperts";
+            this.DataExperts.Size = new System.Drawing.Size(1081, 360);
+            this.DataExperts.TabIndex = 1;
+            // 
             // ProblemTextBox
             // 
             this.ProblemTextBox.Location = new System.Drawing.Point(12, 37);
@@ -113,27 +123,19 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Форумлировка проблемы";
             // 
-            // DataExperts
-            // 
-            this.DataExperts.BackgroundColor = System.Drawing.Color.White;
-            this.DataExperts.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.DataExperts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataExperts.Location = new System.Drawing.Point(9, 8);
-            this.DataExperts.Name = "DataExperts";
-            this.DataExperts.Size = new System.Drawing.Size(1081, 360);
-            this.DataExperts.TabIndex = 1;
-            // 
             // ProblemEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1130, 702);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ProblemTextBox);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.BackButton);
             this.Name = "ProblemEdit";
-            this.Text = "ProblemEdit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Редактор проблемы";
             this.Load += new System.EventHandler(this.ProblemEdit_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

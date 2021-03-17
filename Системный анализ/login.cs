@@ -15,8 +15,10 @@ namespace Системный_анализ
         private List<List<string>> solutions = new List<List<string>>();
         private List<List<string>> experts = new List<List<string>>();
         private List<List<string>> Problems = new List<List<string>>();
+        private List<List<List<List<string>>>> Matrix = new List<List<List<List<string>>>>();
         private Menu back;
-        public login(Menu back, ref List<List<string>> experts, ref List<List<string>> solutions, ref List<List<string>> Problems)
+
+        public login(Menu back, ref List<List<string>> experts, ref List<List<string>> solutions, ref List<List<string>> Problems, ref List<List<List<List<string>>>> Matrix)
         {
             this.back = back;
             this.experts = experts;
@@ -75,8 +77,11 @@ namespace Системный_анализ
 
             if (AnyTasks && isAuth)
             {
-                // Form ExpertInterface = new ExpertInterface();
-                MessageBox.Show("Вы вошли");
+                Form ExpertInterface = new ExpertInterface(back, solutions, experts, Problems, this, ref Matrix);
+                ExpertInterface.Show();
+                this.Hide();
+                back.Hide();
+
             }
 
         }

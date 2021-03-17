@@ -12,42 +12,45 @@ namespace Системный_анализ
 {
     public partial class ExpertInterface : Form
     {
-        private List<List<string>> Experts = new List<List<string>>();
+
+        private List<List<string>> solutions = new List<List<string>>();
+        private List<List<string>> experts = new List<List<string>>();
+        private List<List<string>> Problems = new List<List<string>>();
+        private List<List<List<List<string>>>> Matrix = new List<List<List<List<string>>>>();
         private Menu back;
-        private List<List<string>> ProblemsFormulation = new List<List<string>>();
-        private List<string> Solutions = new List<string>();
-        public ExpertInterface(ref List<List<string>> ProblemsFormulation, ref List<string> Solutions, ref List<List<string>> Experts, Menu back)
+        private login close;
+
+        public ExpertInterface(Menu back, List<List<string>> solutions, List<List<string>> experts, List<List<string>> Problems, login close, ref List<List<List<List<string>>>> Matrix)
         {
-            this.Experts = Experts;
-            this.ProblemsFormulation = ProblemsFormulation;
-            this.Solutions = Solutions;
             this.back = back;
+            this.solutions = solutions;
+            this.experts = experts;
+            this.Problems = Problems;
+            this.close = close;
             InitializeComponent();
-
-            ProblemsComboBox.SelectedIndexChanged += ProblemsComboBox_SelectedIndexChanged;
-
-            for (int i = 0; i < ProblemsFormulation.Count; i++)
-            {
-                ProblemsComboBox.Items.Add(ProblemsFormulation[i][0]);
-            }
-        }
-
-        void ProblemsComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedState = ProblemsComboBox.SelectedItem.ToString();
-
-            for (int i = 0; i < ProblemsFormulation.Count; i++)
-                if (ProblemsFormulation[i][0].ToString() == selectedState)
-                {
-                    CurrentProblemFormulation.Text = ProblemsFormulation[i][1].ToString();
-                    break;
-                }
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            close.Close();
             this.Close();
             back.Show();
+        }
+
+        private void ExpertInterface_Load(object sender, EventArgs e)
+        {
+            
+
+            for (int i = 0; i < experts.Count; i++)
+            {
+                if (experts[i][4].Contains(Problems[i][0]) && Problems[i][1] == "Готово")
+                {
+                   
+
+                }
+            }
+
+
         }
     }
 }

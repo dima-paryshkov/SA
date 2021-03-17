@@ -38,11 +38,11 @@
             // 
             this.LoginLabel.AutoSize = true;
             this.LoginLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LoginLabel.Location = new System.Drawing.Point(64, 35);
+            this.LoginLabel.Location = new System.Drawing.Point(40, 37);
             this.LoginLabel.Name = "LoginLabel";
-            this.LoginLabel.Size = new System.Drawing.Size(109, 20);
+            this.LoginLabel.Size = new System.Drawing.Size(153, 20);
             this.LoginLabel.TabIndex = 0;
-            this.LoginLabel.Text = "Введите имя";
+            this.LoginLabel.Text = "Введите ваше имя";
             // 
             // LoginTextBox
             // 
@@ -82,7 +82,7 @@
             this.Controls.Add(this.LoginLabel);
             this.Name = "login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "login";
+            this.Text = "Авторизация";
             this.ResumeLayout(false);
             this.PerformLayout();
 

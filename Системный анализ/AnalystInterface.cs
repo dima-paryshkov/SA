@@ -22,17 +22,19 @@ namespace Системный_анализ
         private List<List<string>> experts = new List<List<string>>();
         private List<List<string>> Problems = new List<List<string>>();
         private List<string> Formulations = new List<string>();
+        private List<List<List<List<string>>>> Matrix = new List<List<List<List<string>>>>();
 
         private bool status = false, load_status = false;
         private int count;
         private int k = 0;
 
-        public AnalystInterface(Menu back, ref List<List<string>> solutions, ref List<List<string>> experts, ref List<List<string>> Problems, ref List<string> Formulations)
+        public AnalystInterface(Menu back, ref List<List<string>> solutions, ref List<List<string>> experts, ref List<List<string>> Problems, ref List<string> Formulations, ref List<List<List<List<string>>>> Matrix)
         {
             this.back = back;
             this.experts = experts;
             this.solutions = solutions;
             this.Formulations = Formulations;
+            this.Matrix = Matrix;
             this.Problems = Problems;
             InitializeComponent();
 
@@ -65,7 +67,7 @@ namespace Системный_анализ
                 Data.Columns[2].ReadOnly = true;
                 Data.Columns[4].ReadOnly = true;
                 Data.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                Data.Columns[1].Width = 500;
+                Data.Columns[1].Width = 913;
                 Data.Columns[3].Width = 22;
                 Data.Columns[3].ReadOnly = true;
                 Data.Columns[4].Visible = false;
@@ -84,10 +86,10 @@ namespace Системный_анализ
                 dataGridView.Columns[5].ReadOnly = true;
                 dataGridView.Columns[4].ReadOnly = true;
                 dataGridView.Columns[4].Visible = false;
-                dataGridView.Columns[0].Width = 150;
-                dataGridView.Columns[1].Width = 250;
-                dataGridView.Columns[2].Width = 100;
-                dataGridView.Columns[3].Width = 100;
+                dataGridView.Columns[0].Width = 266;
+                dataGridView.Columns[1].Width = 390;
+                dataGridView.Columns[2].Width = 200;
+                dataGridView.Columns[3].Width = 200;
             }
 
             count = Problems.Count;
@@ -151,6 +153,9 @@ namespace Системный_анализ
 
                 if (count < Data.Rows.Count)
                 {
+
+                    if (count != 0) Matrix.Add(new List<List<List<string>>>());
+
                     List<string> sol = new List<string>();
                     solutions.Add(sol);
                     Problems.Add(new List<string>());
@@ -198,6 +203,8 @@ namespace Системный_анализ
 
                     Formulations.RemoveAt(e.RowIndex);
 
+                    Matrix.RemoveAt(e.RowIndex);
+
                     count--;
 
                     for (int i = 0; i < experts.Count; i++)
@@ -226,7 +233,7 @@ namespace Системный_анализ
             if (e.RowIndex != -1 && e.ColumnIndex == 1)
                 if (Data.Rows[e.RowIndex].Cells[1].Value != null)
                 {
-                    Form edit = new ProblemEdit(this, ref Data, e, ref solutions, ref experts, ref Formulations);
+                    Form edit = new ProblemEdit(this, ref Data, e, ref solutions, ref experts, ref Formulations, ref Matrix);
                     this.Hide();
                     edit.Show();
                 }

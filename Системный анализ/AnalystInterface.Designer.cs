@@ -39,11 +39,12 @@
             // 
             // BackButton
             // 
-            this.BackButton.Location = new System.Drawing.Point(12, 427);
+            this.BackButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BackButton.Location = new System.Drawing.Point(12, 628);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(75, 23);
+            this.BackButton.Size = new System.Drawing.Size(238, 49);
             this.BackButton.TabIndex = 0;
-            this.BackButton.Text = "Назад";
+            this.BackButton.Text = "Назад в меню";
             this.BackButton.UseVisualStyleBackColor = true;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
@@ -52,16 +53,17 @@
             this.Data.BackgroundColor = System.Drawing.Color.White;
             this.Data.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Data.Location = new System.Drawing.Point(12, 12);
+            this.Data.Location = new System.Drawing.Point(6, 3);
             this.Data.Name = "Data";
-            this.Data.Size = new System.Drawing.Size(773, 409);
+            this.Data.Size = new System.Drawing.Size(1119, 539);
             this.Data.TabIndex = 2;
             // 
             // ExpertList
             // 
-            this.ExpertList.Location = new System.Drawing.Point(625, 427);
+            this.ExpertList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ExpertList.Location = new System.Drawing.Point(880, 628);
             this.ExpertList.Name = "ExpertList";
-            this.ExpertList.Size = new System.Drawing.Size(154, 23);
+            this.ExpertList.Size = new System.Drawing.Size(238, 49);
             this.ExpertList.TabIndex = 3;
             this.ExpertList.Text = "Список экспертов";
             this.ExpertList.UseVisualStyleBackColor = true;
@@ -69,9 +71,10 @@
             // 
             // ExpertListBack
             // 
-            this.ExpertListBack.Location = new System.Drawing.Point(307, 427);
+            this.ExpertListBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ExpertListBack.Location = new System.Drawing.Point(441, 628);
             this.ExpertListBack.Name = "ExpertListBack";
-            this.ExpertListBack.Size = new System.Drawing.Size(171, 23);
+            this.ExpertListBack.Size = new System.Drawing.Size(238, 49);
             this.ExpertListBack.TabIndex = 4;
             this.ExpertListBack.Text = "Назад к списку проблем";
             this.ExpertListBack.UseVisualStyleBackColor = true;
@@ -85,7 +88,7 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(6, 3);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(773, 409);
+            this.dataGridView.Size = new System.Drawing.Size(1119, 539);
             this.dataGridView.TabIndex = 5;
             this.dataGridView.Visible = false;
             // 
@@ -93,8 +96,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(791, 462);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(1130, 702);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ExpertListBack);
             this.Controls.Add(this.ExpertList);
