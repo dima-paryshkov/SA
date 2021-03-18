@@ -36,6 +36,8 @@ namespace Системный_анализ
         {
             bool isAuth = false;
             bool AnyTasks = false;
+            int ID = -1;
+            int ProblemID = -1;
 
             if (LoginTextBox.Text == "")
             {
@@ -48,6 +50,7 @@ namespace Системный_анализ
                 if (experts[i][0] == LoginTextBox.Text)
                 {
                     isAuth = true;
+                    ID = i;
                     break;
                 }
             }
@@ -59,25 +62,26 @@ namespace Системный_анализ
             }
 
 
-            for (int i = 0; i < experts.Count; i++)
+            for (int i = 0; i < Problems.Count - 1; i++)
             {
-                if (experts[i][4].Contains(Problems[i][0]) && Problems[i][1] == "Готово")
+                if (experts[ID][4].Contains(Problems[i][0]) && Problems[i][1] == "Готово")
                 {
                     AnyTasks = true;
+                    ProblemID = i;
                     break;
                 }
             }
 
             if (!AnyTasks)
             {
-                MessageBox.Show("Нет проблем готовых к ршению, попробуйте позже");
+                MessageBox.Show("Нет проблем готовых к решению, попробуйте позже");
                 return;
             }
 
 
             if (AnyTasks && isAuth)
             {
-                Form ExpertInterface = new ExpertInterface(back, solutions, experts, Problems, this, ref Matrix);
+                Form ExpertInterface = new ExpertInterface(back, solutions, experts, Problems, this, ref Matrix, ProblemID);
                 ExpertInterface.Show();
                 this.Hide();
                 back.Hide();

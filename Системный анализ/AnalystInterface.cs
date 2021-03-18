@@ -241,10 +241,15 @@ namespace Системный_анализ
         }
         private void ChangeStatusReady(object sender, EventArgs e)
         {
-            status = !status;
-            Data.Rows[temp.RowIndex].Cells[2].Value = "Готово";
-            Problems[temp.RowIndex][1] = "Готово";
-            status = !status;
+            if (solutions[temp.RowIndex].Count > 1)
+            {
+                status = !status;
+                Data.Rows[temp.RowIndex].Cells[2].Value = "Готово";
+                Problems[temp.RowIndex][1] = "Готово";
+                status = !status;
+            }
+            else
+                MessageBox.Show("Добавьте больше альтернатив для решения проблемы");
         }
 
         private void ChangeStatusТNotReady(object sender, EventArgs e)

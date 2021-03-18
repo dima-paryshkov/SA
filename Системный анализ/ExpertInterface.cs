@@ -19,14 +19,16 @@ namespace Системный_анализ
         private List<List<List<List<string>>>> Matrix = new List<List<List<List<string>>>>();
         private Menu back;
         private login close;
+        private int ProblemID;
 
-        public ExpertInterface(Menu back, List<List<string>> solutions, List<List<string>> experts, List<List<string>> Problems, login close, ref List<List<List<List<string>>>> Matrix)
+        public ExpertInterface(Menu back, List<List<string>> solutions, List<List<string>> experts, List<List<string>> Problems, login close, ref List<List<List<List<string>>>> Matrix, int ProblemID)
         {
             this.back = back;
             this.solutions = solutions;
             this.experts = experts;
             this.Problems = Problems;
             this.close = close;
+            this.ProblemID = ProblemID;
             InitializeComponent();
         }
 
@@ -39,18 +41,31 @@ namespace Системный_анализ
 
         private void ExpertInterface_Load(object sender, EventArgs e)
         {
-            
 
-            for (int i = 0; i < experts.Count; i++)
+            textBoxFirst.Text = solutions[ProblemID][0];
+            textBoxSecond.Text = solutions[ProblemID][1];
+
+
+
+        }
+
+        private void checkBoxSecond_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxBoth.Checked)
             {
-                if (experts[i][4].Contains(Problems[i][0]) && Problems[i][1] == "Готово")
-                {
-                   
-
-                }
+                checkBoxBoth.Checked = false;
+                checkBoxFirst.Checked = false;
             }
 
+        }
 
+        private void checkBoxBoth_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxFirst.Checked || checkBoxSecond.Checked)
+            {
+                checkBoxSecond.Checked = false;
+                checkBoxFirst.Checked = false;
+            }
         }
     }
 }
