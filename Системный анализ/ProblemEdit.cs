@@ -97,7 +97,7 @@ namespace Системный_анализ
                 DataSolutions.Columns[3].Width = 22;
                 DataSolutions.Rows[i].Cells[2].Value = " ...";
                 DataSolutions.Rows[i].Cells[3].Value = " X";
-                DataSolutions.Columns[1].Width = 500;
+                DataSolutions.Columns[1].Width = 953;
             }
 
             for (int i = 0; i < experts.Count; i++)

@@ -150,6 +150,7 @@ namespace Системный_анализ
                 Data.Rows[e.RowIndex].Cells[2].ContextMenuStrip = tmp;
                 Data.Rows[e.RowIndex].Cells[3].Style.BackColor = Color.Red;
                 Data.Rows[e.RowIndex].Cells[3].Value = " X";
+               // if (Problems.Count > e.RowIndex) Problems[e.RowIndex][0] = Data.Rows[e.RowIndex].Cells[1].Value.ToString();
 
                 if (count < Data.Rows.Count)
                 {
