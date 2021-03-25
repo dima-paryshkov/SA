@@ -86,7 +86,7 @@
             // 
             // textBoxFirst
             // 
-            this.textBoxFirst.BackColor = System.Drawing.SystemColors.Menu;
+            this.textBoxFirst.BackColor = System.Drawing.Color.White;
             this.textBoxFirst.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxFirst.Location = new System.Drawing.Point(65, 214);
             this.textBoxFirst.Multiline = true;
@@ -108,7 +108,7 @@
             // 
             // textBoxSecond
             // 
-            this.textBoxSecond.BackColor = System.Drawing.SystemColors.Menu;
+            this.textBoxSecond.BackColor = System.Drawing.Color.White;
             this.textBoxSecond.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxSecond.Location = new System.Drawing.Point(640, 214);
             this.textBoxSecond.Multiline = true;

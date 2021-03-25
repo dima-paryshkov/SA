@@ -43,6 +43,7 @@ namespace Системный_анализ
             Data.CellValueChanged += Data_CellValueChanged;
             dataGridView.CellValueChanged += dataGridView_CellValueChanged;
             dataGridView.CellMouseClick += dataGridView_CellMouseClick;
+            dataGridViewResults.CellMouseClick += dataGridViewResults_CellMouseClick; 
             Data.CellMouseClick += Data_CellMouseClick;
             Data.CellDoubleClick += Data_CellDoubleClick;
             Ready.Click += new EventHandler(ChangeStatusReady);
@@ -260,15 +261,57 @@ namespace Системный_анализ
                dataGridView.Rows.Remove(dataGridView.Rows[e.RowIndex]);
         }
 
+      
+
+        private void dataGridViewResults_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            if (e.ColumnIndex == 2 && e.RowIndex != -1 && dataGridViewResults.Rows[e.RowIndex].Cells[2].Value != null)
+            {
+                int expertID = -1;
+                int ProblemID = -1;
+                for (int i = 0; i < experts.Count; i++)
+                {
+                    if (experts[i][0] == dataGridViewResults.Rows[e.RowIndex].Cells[0].Value.ToString())
+                    {
+                        expertID = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < Problems.Count; i++)
+                {
+                    if (Problems[i][0] == dataGridViewResults.Rows[e.RowIndex].Cells[1].Value.ToString())
+                    {
+                        ProblemID = i;
+                        break;
+                    }
+                }
+
+                Form Method = new Methods(Matrix, solutions, ProblemID, expertID);
+                Method.ShowDialog();
+            }
+            
+        }
+
         private void Data_CellDoubleClick(Object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1 && e.ColumnIndex == 1)
-                if (Data.Rows[e.RowIndex].Cells[1].Value != null)
+
+                if (Problems[temp.RowIndex][1] != "Готово")
                 {
-                    Form edit = new ProblemEdit(this, ref Data, e, ref solutions, ref experts, ref Formulations);
-                    this.Hide();
-                    edit.Show();
+                    if (e.RowIndex != -1 && e.ColumnIndex == 1)
+                        if (Data.Rows[e.RowIndex].Cells[1].Value != null)
+                        {
+                            Form edit = new ProblemEdit(this, ref Data, e, ref solutions, ref experts, ref Formulations);
+                            this.Hide();
+                            edit.Show();
+                        }
                 }
+                else
+                {
+                    MessageBox.Show("Изменение параметров невозможно, проблема отправлена на оценку экспертам!");
+                }
+   
 
         }
 

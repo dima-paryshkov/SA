@@ -212,8 +212,8 @@ namespace Системный_анализ
 
         private void setBoth(object sender, EventArgs e)
         {
-            Matrix[ID][ProblemID][0][Zx][Zy] = "0.5";
-            Matrix[ID][ProblemID][0][Zy][Zx] = "0.5";
+            Matrix[ID][ProblemID][0][Zx][Zy] = "0,5";
+            Matrix[ID][ProblemID][0][Zy][Zx] = "0,5";
 
             textBoxFirst.BackColor = Color.Green;
             textBoxSecond.BackColor = Color.Green;
@@ -316,7 +316,7 @@ namespace Системный_анализ
 
             }
 
-            if (Matrix[ID][ProblemID][0][Zx][Zy] == "0.5")
+            if (Matrix[ID][ProblemID][0][Zx][Zy] == "0,5")
             {
                 textBoxFirst.BackColor = Color.Green;
                 textBoxSecond.BackColor = Color.Green;
@@ -346,9 +346,27 @@ namespace Системный_анализ
             EndButton.Visible = false;
             BackButton.Visible = true;
 
-          
+            if (Zy - 1 == Zx)
+            {
+                Zx--;
+                Zy = solutions[ProblemID].Count - 1;
 
-            if (Matrix[ID][ProblemID][0][Zx][Zy] == "0.5")
+                textBoxFirst.Text = solutions[ProblemID][Zx];
+                textBoxSecond.Text = solutions[ProblemID][Zy];
+            }
+            else
+            {
+                Zy--;
+                textBoxSecond.Text = solutions[ProblemID][Zy];
+            }
+
+            if (Zy == 1)
+            {
+                PreviousButton.Enabled = false;
+            }
+
+
+            if (Matrix[ID][ProblemID][0][Zx][Zy] == "0,5")
             {
                 textBoxFirst.BackColor = Color.Green;
                 textBoxSecond.BackColor = Color.Green;

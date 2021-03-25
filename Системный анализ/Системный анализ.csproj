@@ -76,6 +76,12 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Methods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Methods.Designer.cs">
+      <DependentUpon>Methods.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProblemEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Methods.resx">
+      <DependentUpon>Methods.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProblemEdit.resx">
       <DependentUpon>ProblemEdit.cs</DependentUpon>
