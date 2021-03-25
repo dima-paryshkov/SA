@@ -17,8 +17,10 @@ namespace Системный_анализ
         private List<List<string>> experts = new List<List<string>>();
         private List<List<string>> Problems = new List<List<string>>();
         private List<string> Formulations = new List<string>();
+        private List<List<bool>> ready = new List<List<bool>>();
 
-        private List<List<List<List<string>>>> Matrix = new List<List<List<List<string>>>>();
+
+        private List<List<List<List<List<string>>>>> Matrix = new List<List<List<List<List<string>>>>>();
 
         public Menu()
         {
@@ -27,7 +29,7 @@ namespace Системный_анализ
 
         private void AnalystInterfaceButton_Click(object sender, EventArgs e)
         {
-            Form Analyst = new AnalystInterface(this, ref solutions, ref experts, ref Problems, ref Formulations, ref Matrix);
+            Form Analyst = new AnalystInterface(this, ref solutions, ref experts, ref Problems, ref Formulations, ref Matrix, ref ready);
             this.Hide();
 
             Analyst.Show();
@@ -36,7 +38,7 @@ namespace Системный_анализ
 
         private void ExpertInterfaceButton_Click(object sender, EventArgs e)
         {
-            Form login = new login(this, ref experts, ref solutions, ref Problems, ref Matrix);
+            Form login = new login(this, ref experts, ref solutions, ref Problems, ref Matrix, Formulations, ref ready);
             login.ShowDialog();
         }
 

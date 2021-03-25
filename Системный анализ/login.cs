@@ -15,15 +15,20 @@ namespace Системный_анализ
         private List<List<string>> solutions = new List<List<string>>();
         private List<List<string>> experts = new List<List<string>>();
         private List<List<string>> Problems = new List<List<string>>();
-        private List<List<List<List<string>>>> Matrix = new List<List<List<List<string>>>>();
+        private List<List<List<List<List<string>>>>> Matrix = new List<List<List<List<List<string>>>>>();
+        private List<string> Formulations = new List<string>();
         private Menu back;
+        private List<List<bool>> ready = new List<List<bool>>();
 
-        public login(Menu back, ref List<List<string>> experts, ref List<List<string>> solutions, ref List<List<string>> Problems, ref List<List<List<List<string>>>> Matrix)
+        public login(Menu back, ref List<List<string>> experts, ref List<List<string>> solutions, ref List<List<string>> Problems, ref List<List<List<List<List<string>>>>> Matrix, List<string> Formulations, ref List<List<bool>> ready)
         {
             this.back = back;
             this.experts = experts;
             this.solutions = solutions;
+            this.Matrix = Matrix;
             this.Problems = Problems;
+            this.Formulations = Formulations;
+            this.ready = ready;
             InitializeComponent();
         }
 
@@ -62,7 +67,7 @@ namespace Системный_анализ
             }
 
 
-            for (int i = 0; i < Problems.Count - 1; i++)
+            for (int i = 0; i < Problems.Count; i++)
             {
                 if (experts[ID][4].Contains(Problems[i][0]) && Problems[i][1] == "Готово")
                 {
@@ -81,7 +86,7 @@ namespace Системный_анализ
 
             if (AnyTasks && isAuth)
             {
-                Form ExpertInterface = new ExpertInterface(back, solutions, experts, Problems, this, ref Matrix, ProblemID);
+                Form ExpertInterface = new ExpertInterface(back, solutions, experts, Problems, this, ref Matrix, ProblemID, ID, Formulations, ref ready);
                 ExpertInterface.Show();
                 this.Hide();
                 back.Hide();

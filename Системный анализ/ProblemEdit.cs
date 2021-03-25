@@ -19,9 +19,8 @@ namespace Системный_анализ
         private List<List<string>> solutions = new List<List<string>>();
         private List<List<string>> experts = new List<List<string>>();
         private List<string> Formulations = new List<string>();
-        private List<List<List<List<string>>>> Matrix = new List<List<List<List<string>>>>();
 
-        public ProblemEdit(AnalystInterface back, ref DataGridView Data, DataGridViewCellEventArgs e, ref List<List<string>> solutions, ref List<List<string>> experts, ref List<string> Formulations, ref List<List<List<List<string>>>> Matrix)
+        public ProblemEdit(AnalystInterface back, ref DataGridView Data, DataGridViewCellEventArgs e, ref List<List<string>> solutions, ref List<List<string>> experts, ref List<string> Formulations)
         {
             this.Data = Data;
             this.e = e;
@@ -29,7 +28,6 @@ namespace Системный_анализ
             this.experts = experts;
             this.Formulations = Formulations;
             this.solutions = solutions;
-            this.Matrix = Matrix;
             InitializeComponent();
             DataSolutions.CellValueChanged += Data_CellValueChanged;
             DataSolutions.CellMouseClick += DataSolutions_CellMouseClick;
@@ -176,8 +174,6 @@ namespace Системный_анализ
                     experts[e.RowIndex][4] += Data.Rows[this.e.RowIndex].Cells[1].Value.ToString() + "  ";
                     DataExperts.Rows[e.RowIndex].Cells[4].Value = "Да";
 
-                    Matrix[this.e.RowIndex].Add(new List<List<string>>());
-
                 }
             }
 
@@ -191,8 +187,6 @@ namespace Системный_анализ
                     var substr = Data.Rows[this.e.RowIndex].Cells[1].Value.ToString() + "  ";
                     experts[e.RowIndex][4] = experts[e.RowIndex][4].Replace(substr, "");
                     DataExperts.Rows[e.RowIndex].Cells[4].Value = "Нет";
-
-                    Matrix[this.e.RowIndex].RemoveAt(e.RowIndex);
                 }
             }
 

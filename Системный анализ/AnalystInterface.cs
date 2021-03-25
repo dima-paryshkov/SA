@@ -22,13 +22,14 @@ namespace Системный_анализ
         private List<List<string>> experts = new List<List<string>>();
         private List<List<string>> Problems = new List<List<string>>();
         private List<string> Formulations = new List<string>();
-        private List<List<List<List<string>>>> Matrix = new List<List<List<List<string>>>>();
+        private List<List<List<List<List<string>>>>> Matrix = new List<List<List<List<List<string>>>>>();
+        private List<List<bool>> ready = new List<List<bool>>();
 
         private bool status = false, load_status = false;
         private int count;
         private int k = 0;
 
-        public AnalystInterface(Menu back, ref List<List<string>> solutions, ref List<List<string>> experts, ref List<List<string>> Problems, ref List<string> Formulations, ref List<List<List<List<string>>>> Matrix)
+        public AnalystInterface(Menu back, ref List<List<string>> solutions, ref List<List<string>> experts, ref List<List<string>> Problems, ref List<string> Formulations, ref List<List<List<List<List<string>>>>> Matrix, ref List<List<bool>> ready)
         {
             this.back = back;
             this.experts = experts;
@@ -36,6 +37,7 @@ namespace Системный_анализ
             this.Formulations = Formulations;
             this.Matrix = Matrix;
             this.Problems = Problems;
+            this.ready = ready;
             InitializeComponent();
 
             Data.CellValueChanged += Data_CellValueChanged;
@@ -44,7 +46,7 @@ namespace Системный_анализ
             Data.CellMouseClick += Data_CellMouseClick;
             Data.CellDoubleClick += Data_CellDoubleClick;
             Ready.Click += new EventHandler(ChangeStatusReady);
-            NotReady.Click += new EventHandler(ChangeStatusТNotReady);
+            //NotReady.Click += new EventHandler(ChangeStatusТNotReady);
 
         }
 
@@ -92,10 +94,25 @@ namespace Системный_анализ
                 dataGridView.Columns[3].Width = 200;
             }
 
-            count = Problems.Count;
+            //список решенных проблем
+            {
+                dataGridViewResults.Columns.Add("name", "Имя эксперта");
+                dataGridViewResults.Columns.Add("problem", "Решенная проблема");
+                dataGridViewResults.Columns.Add("method", "");
+
+                dataGridViewResults.Columns[0].ReadOnly = true;
+                dataGridViewResults.Columns[1].ReadOnly = true;
+                dataGridViewResults.Columns[2].ReadOnly = true;
+                dataGridViewResults.Columns[0].Width = 278;
+                dataGridViewResults.Columns[1].Width = 600;
+                dataGridViewResults.Columns[2].Width = 200;
+            }
+
+            if (Problems.Count == 0) count = 1;
+            else count = Problems.Count + 1;
 
            //загрузка списка проблем в таблицу
-            for (int i = 0; i < Problems.Count - 1; i++)
+            for (int i = 0; i < Problems.Count; i++)
            {
                 Data.Rows.Add();
                 Data.Rows[i].Cells[0].Value = i + 1;
@@ -136,6 +153,7 @@ namespace Системный_анализ
                 {
                     if (i == e.RowIndex)
                         continue;
+
                     if (Data.Rows[i].Cells[1].Value.ToString() == Data.Rows[e.RowIndex].Cells[1].Value.ToString())
                     {
                         Data.Rows.Remove(Data.Rows[e.RowIndex]);
@@ -146,16 +164,14 @@ namespace Системный_анализ
 
 
                 Data.Rows[e.RowIndex].Cells[0].Value = e.RowIndex + 1;
-                tmp.Items.AddRange(new[] { Ready, NotReady });
+                tmp.Items.AddRange(new[] { Ready });
                 Data.Rows[e.RowIndex].Cells[2].ContextMenuStrip = tmp;
                 Data.Rows[e.RowIndex].Cells[3].Style.BackColor = Color.Red;
                 Data.Rows[e.RowIndex].Cells[3].Value = " X";
-               // if (Problems.Count > e.RowIndex) Problems[e.RowIndex][0] = Data.Rows[e.RowIndex].Cells[1].Value.ToString();
+              
 
                 if (count < Data.Rows.Count)
                 {
-
-                    if (count != 0) Matrix.Add(new List<List<List<string>>>());
 
                     List<string> sol = new List<string>();
                     solutions.Add(sol);
@@ -163,6 +179,17 @@ namespace Системный_анализ
                     Problems[e.RowIndex].Add(Data.Rows[e.RowIndex].Cells[1].Value.ToString());
                     Problems[e.RowIndex].Add("");
                     Formulations.Add("");
+
+
+                    for (int i = 0; i < experts.Count; i++)
+                    {
+                        if (Matrix[i].Count < Problems.Count)
+                        {
+                            Matrix[i].Add(new List<List<List<string>>>());
+                            ready[i].Add(false);
+                        }
+                    }
+
                     count++;
                 }
 
@@ -204,13 +231,17 @@ namespace Системный_анализ
 
                     Formulations.RemoveAt(e.RowIndex);
 
-                    Matrix.RemoveAt(e.RowIndex);
-
                     count--;
 
                     for (int i = 0; i < experts.Count; i++)
+                    {
                         if (experts[i][4].Contains(substr))
-                            experts[i][4] = experts[e.RowIndex][4].Replace(substr, "");
+                        {
+                            Matrix[i][e.RowIndex][0].Clear();
+                            experts[i][4] = experts[i][4].Replace(substr, "");
+                            ready[i].RemoveAt(e.RowIndex);
+                        }
+                    }
 
                     load_status = false;
                     for (int i = 0; i < Data.Rows.Count - 1; i++)
@@ -234,40 +265,122 @@ namespace Системный_анализ
             if (e.RowIndex != -1 && e.ColumnIndex == 1)
                 if (Data.Rows[e.RowIndex].Cells[1].Value != null)
                 {
-                    Form edit = new ProblemEdit(this, ref Data, e, ref solutions, ref experts, ref Formulations, ref Matrix);
+                    Form edit = new ProblemEdit(this, ref Data, e, ref solutions, ref experts, ref Formulations);
                     this.Hide();
                     edit.Show();
                 }
 
         }
+
         private void ChangeStatusReady(object sender, EventArgs e)
         {
-            if (solutions[temp.RowIndex].Count > 1)
+
+            if (Problems[temp.RowIndex][1] != "Готово")
             {
-                status = !status;
-                Data.Rows[temp.RowIndex].Cells[2].Value = "Готово";
-                Problems[temp.RowIndex][1] = "Готово";
-                status = !status;
+                bool rdy = false;
+                for (int m = 0; m < experts.Count; m++)
+                {
+                    if (experts[m][4].Contains(Problems[temp.RowIndex][0]))
+                        rdy = true;
+                }
+                if (rdy)
+                {
+                    if (solutions[temp.RowIndex].Count > 1)
+                    {
+                        for (int m = 0; m < experts.Count; m++)
+                        {
+                            if (experts[m][4].Contains(Problems[temp.RowIndex][0]))
+                            {
+                                if (Matrix[m][temp.RowIndex].Count < solutions[temp.RowIndex].Count)
+                                {
+                                    Matrix[m][temp.RowIndex].Clear();
+
+                                    Matrix[m][temp.RowIndex].Add(new List<List<string>>());
+
+                                    for (int j = 0; j < solutions[temp.RowIndex].Count; j++)
+                                    {
+                                        var a = new List<string>();
+
+                                        for (int k = 0; k < solutions[temp.RowIndex].Count; k++)
+                                        {
+                                            a.Add("");
+                                        }
+
+                                        Matrix[m][temp.RowIndex][0].Add(a);
+                                    }
+                                }
+
+                            }
+                        }
+                        status = !status;
+                        Data.Rows[temp.RowIndex].Cells[2].Value = "Готово";
+                        Problems[temp.RowIndex][1] = "Готово";
+                        status = !status;
+                    }
+                    else
+                        MessageBox.Show("Добавьте больше альтернатив для решения проблемы");
+                }
+                else
+                    MessageBox.Show("Нет экспертов задействованных в оценке проблемы!");
             }
             else
-                MessageBox.Show("Добавьте больше альтернатив для решения проблемы");
+            {
+                MessageBox.Show("Изменение параметров невозможно, проблема отправлена на оценку экспертам!");
+            }
         }
 
-        private void ChangeStatusТNotReady(object sender, EventArgs e)
-        {
-            status = !status;
-            Data.Rows[temp.RowIndex].Cells[2].Value = "Не готово";
-            Problems[temp.RowIndex][1] = "Не готово";
-            status = !status;
-        }
+        //private void ChangeStatusТNotReady(object sender, EventArgs e)
+        //{
+        //    status = !status;
+        //    Data.Rows[temp.RowIndex].Cells[2].Value = "Не готово";
+        //    Problems[temp.RowIndex][1] = "Не готово";
+        //    status = !status;
+        //}
 
         private void ExpertList_Click(object sender, EventArgs e)
         {
             Data.Visible = false;
+            ShowResultsButton.Visible = false;
             BackButton.Visible = false;
             dataGridView.Visible = true;
             ExpertList.Visible = false;
             ExpertListBack.Visible = true;
+        }
+
+        private void ShowResultsButton_Click(object sender, EventArgs e)
+        {
+            BackFromResultsshow.Visible = true;
+            Data.Visible = false;
+            BackButton.Visible = false;
+            ShowResultsButton.Visible = false;
+            ExpertList.Visible = false;
+            dataGridViewResults.Visible = true;
+
+
+            for (int i = 0; i < ready.Count; i++)
+            {
+                for (int j = 0; j < Problems.Count; j++)
+                {
+                    if (ready[i][j] == true)
+                    {
+                        dataGridViewResults.Rows.Add();
+                        dataGridViewResults.Rows[j].Cells[0].Value = experts[i][0];
+                        dataGridViewResults.Rows[j].Cells[1].Value = Problems[j][0];
+                        dataGridViewResults.Rows[j].Cells[2].Value = "Выбрать метод оценки";
+                    }
+                }
+            }
+
+        }
+
+        private void BackFromResultsshow_Click(object sender, EventArgs e)
+        {
+            BackFromResultsshow.Visible = false;
+            Data.Visible = true;
+            BackButton.Visible = true;
+            ShowResultsButton.Visible = true;
+            dataGridViewResults.Visible = false;
+            ExpertList.Visible = true;
         }
 
         private void ExpertListBack_Click(object sender, EventArgs e)
@@ -287,6 +400,7 @@ namespace Системный_анализ
 
 
             Data.Visible = true;
+            ShowResultsButton.Visible = true;
             BackButton.Visible = true;
             dataGridView.Visible = false;
             ExpertList.Visible = true;
@@ -316,6 +430,13 @@ namespace Системный_анализ
                 k++;
             }
 
+            Matrix.Add(new List<List<List<List<string>>>>());
+            ready.Add(new List<bool>());
+            for (int i = 0; i < Problems.Count; i++)
+            {
+                Matrix[experts.Count - 1].Add(new List<List<List<string>>>());
+                ready[experts.Count - 1].Add(false);
+            }
         }
 
 

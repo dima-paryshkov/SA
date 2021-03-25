@@ -33,8 +33,12 @@
             this.ExpertList = new System.Windows.Forms.Button();
             this.ExpertListBack = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.ShowResultsButton = new System.Windows.Forms.Button();
+            this.BackFromResultsshow = new System.Windows.Forms.Button();
+            this.dataGridViewResults = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.Data)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).BeginInit();
             this.SuspendLayout();
             // 
             // BackButton
@@ -92,12 +96,49 @@
             this.dataGridView.TabIndex = 5;
             this.dataGridView.Visible = false;
             // 
+            // ShowResultsButton
+            // 
+            this.ShowResultsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ShowResultsButton.Location = new System.Drawing.Point(441, 628);
+            this.ShowResultsButton.Name = "ShowResultsButton";
+            this.ShowResultsButton.Size = new System.Drawing.Size(238, 49);
+            this.ShowResultsButton.TabIndex = 6;
+            this.ShowResultsButton.Text = "Посмотреть результаты оценивания";
+            this.ShowResultsButton.UseVisualStyleBackColor = true;
+            this.ShowResultsButton.Click += new System.EventHandler(this.ShowResultsButton_Click);
+            // 
+            // BackFromResultsshow
+            // 
+            this.BackFromResultsshow.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BackFromResultsshow.Location = new System.Drawing.Point(12, 628);
+            this.BackFromResultsshow.Name = "BackFromResultsshow";
+            this.BackFromResultsshow.Size = new System.Drawing.Size(238, 49);
+            this.BackFromResultsshow.TabIndex = 7;
+            this.BackFromResultsshow.Text = "Назад к списку экспертов";
+            this.BackFromResultsshow.UseVisualStyleBackColor = true;
+            this.BackFromResultsshow.Visible = false;
+            this.BackFromResultsshow.Click += new System.EventHandler(this.BackFromResultsshow_Click);
+            // 
+            // dataGridViewResults
+            // 
+            this.dataGridViewResults.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewResults.Location = new System.Drawing.Point(6, 3);
+            this.dataGridViewResults.Name = "dataGridViewResults";
+            this.dataGridViewResults.Size = new System.Drawing.Size(1119, 539);
+            this.dataGridViewResults.TabIndex = 8;
+            this.dataGridViewResults.Visible = false;
+            // 
             // AnalystInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1130, 702);
+            this.Controls.Add(this.dataGridViewResults);
+            this.Controls.Add(this.BackFromResultsshow);
+            this.Controls.Add(this.ShowResultsButton);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ExpertListBack);
             this.Controls.Add(this.ExpertList);
@@ -109,6 +150,7 @@
             this.Load += new System.EventHandler(this.AnalystInterface_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Data)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -120,5 +162,8 @@
         private System.Windows.Forms.Button ExpertList;
         private System.Windows.Forms.Button ExpertListBack;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.Button ShowResultsButton;
+        private System.Windows.Forms.Button BackFromResultsshow;
+        private System.Windows.Forms.DataGridView dataGridViewResults;
     }
 }
